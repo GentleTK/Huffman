@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "Huffman_Tree.h"
 
-#define Yes 1 //ÈôÒÑµ÷ÓÃ¹ıInitHuff_T()º¯Êı£¬»òÒÑ´ÓhtfTree.txtÎÄ¼ş¶ÁÈ¡¹ı£¬Ôò½«Init_ModeÖÃÎªYes£¬·ñÔòÖÃÎªNo
+#define Yes 1 //è‹¥å·²è°ƒç”¨è¿‡InitHuff_T()å‡½æ•°ï¼Œæˆ–å·²ä»htfTree.txtæ–‡ä»¶è¯»å–è¿‡ï¼Œåˆ™å°†Init_Modeç½®ä¸ºYesï¼Œå¦åˆ™ç½®ä¸ºNo
 #define No 0
 /*
-	ĞÂ½¨Ó¢ÎÄÎÄ±¾ĞÅÏ¢
+	æ–°å»ºè‹±æ–‡æ–‡æœ¬ä¿¡æ¯
 */
 void Create_Message()
 {
@@ -16,8 +16,8 @@ void Create_Message()
 		printf("Can not open this file!\n");
 		return;
 	}
-	getchar();//ÎüÊÕ²Ëµ¥Ñ¡ÔñÊ±ËùÇÃµÄ»Ø³µ»»ĞĞ·û
-	printf("ÇëÊäÈëÔ­ÎÄ(»Ø³µ½áÊø!)£º\n");
+	getchar();//å¸æ”¶èœå•é€‰æ‹©æ—¶æ‰€æ•²çš„å›è½¦æ¢è¡Œç¬¦
+	printf("è¯·è¾“å…¥åŸæ–‡(å›è½¦ç»“æŸ!)ï¼š\n");
 	do
 	{
 		scanf("%c",&c);
@@ -26,30 +26,30 @@ void Create_Message()
 	fclose(fp);
 }
 /*
-	³õÊ¼»¯¹ş·òÂüÊ÷£¬ÒªÇóÓÃ»§ÊäÈë×Ö·ûºÍÏàÓ¦È¨Öµ
+	åˆå§‹åŒ–å“ˆå¤«æ›¼æ ‘ï¼Œè¦æ±‚ç”¨æˆ·è¾“å…¥å­—ç¬¦å’Œç›¸åº”æƒå€¼
 */
 void InitHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[],int &n )
 { 
 	int i = 1,w[100],tem,j;
 	char a[20];
 	FILE *save;
-	printf("ÇëÊäÈë±àÂë×Ö·û¼¯µÄ´óĞ¡n:");
+	printf("è¯·è¾“å…¥ç¼–ç å­—ç¬¦é›†çš„å¤§å°n:");
 	scanf("%d",&n);  
 	while( i <= n )
 	{ 
-		printf("ÇëÊäÈëµÚ%d¸ö×Ö·ûºÍ¸Ã×Ö·ûµÄÈ¨Öµw:",i);
+		printf("è¯·è¾“å…¥ç¬¬%dä¸ªå­—ç¬¦å’Œè¯¥å­—ç¬¦çš„æƒå€¼w:",i);
 		fflush(stdin);
 		scanf("%c%d",&ch[i],&w[i]);
 		i++;
 	}
 	ch[i] = '\0';
-	HuffmanCoding(HT,HC,w,n);  						//Éú³É¹ş·òÂüÊı¼°¸÷¸ö×Ö·ûÏàÓ¦µÄ¹ş·òÂü±àÂë£¬·Ö±ğ´æÔÚHTÊ÷ºÍHCÖĞ
+	HuffmanCoding(HT,HC,w,n);  			//ç”Ÿæˆå“ˆå¤«æ›¼æ•°åŠå„ä¸ªå­—ç¬¦ç›¸åº”çš„å“ˆå¤«æ›¼ç¼–ç ï¼Œåˆ†åˆ«å­˜åœ¨HTæ ‘å’ŒHCä¸­
 	if(( save = fopen("htfTree.txt","wb")) == NULL )
 	{ 
 		printf("Open file fail......\n");
 		exit(0);
 	}
-	tem = n;  										//½«×Ö·û¼¯´óĞ¡×ª»»³É×Ö·ûĞÎÊ½Ğ´Èëµ½ÎÄ¼şÖĞ
+	tem = n;  					//å°†å­—ç¬¦é›†å¤§å°è½¬æ¢æˆå­—ç¬¦å½¢å¼å†™å…¥åˆ°æ–‡ä»¶ä¸­
 	j = 0;
 	while( tem != 0 )
 	{
@@ -67,7 +67,7 @@ void InitHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[],int &n )
 	fputs(a,save);
 	printf("%d\n",n); 
 	fputc('\n',save);
-	for( i = 1; i <= n; i++ )						//·Ö±ğÏòÎÄ¼şºÍÆÁÄ»Êä³ö¸÷¸ö×Ö·ûºÍÏàÓ¦µÄ¹ş·òÂü±àÂë
+	for( i = 1; i <= n; i++ )		//åˆ†åˆ«å‘æ–‡ä»¶å’Œå±å¹•è¾“å‡ºå„ä¸ªå­—ç¬¦å’Œç›¸åº”çš„å“ˆå¤«æ›¼ç¼–ç 
 	{ 
 		fputc(ch[i],save);  
 		printf("%c\t",ch[i]);
@@ -76,9 +76,9 @@ void InitHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[],int &n )
 		printf("%s\n",HC[i]);
 		fputc('\n',save);
 	}
-	for(i = 1; i <= 2 * n - 1; i++ )				//½«¹ş·òÂüÊ÷¸÷¸ö½áµãµÄparent,lchild,rchild·Ö±ğĞ´Èëµ½ÎÄ¼şÖĞ
+	for(i = 1; i <= 2 * n - 1; i++ )	//å°†å“ˆå¤«æ›¼æ ‘å„ä¸ªç»“ç‚¹çš„parent,lchild,rchildåˆ†åˆ«å†™å…¥åˆ°æ–‡ä»¶ä¸­
 	{ 
-		tem = HT[i].parent;							//½«i½áµãµÄparent×ª»»³É×Ö·û²¢Ğ´Èëµ½ÎÄ¼şÖĞ
+		tem = HT[i].parent;		//å°†iç»“ç‚¹çš„parentè½¬æ¢æˆå­—ç¬¦å¹¶å†™å…¥åˆ°æ–‡ä»¶ä¸­
 		if(tem == 0)
 		{
 			fputc(tem + 48,save);
@@ -104,7 +104,7 @@ void InitHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[],int &n )
 			fputc(' ',save);
 		}
 		
-		tem = HT[i].lchild;  						//½«i½áµãµÄlchild×ª»»³É×Ö·û²¢Ğ´Èëµ½ÎÄ¼şÖĞ
+		tem = HT[i].lchild;  		//å°†iç»“ç‚¹çš„lchildè½¬æ¢æˆå­—ç¬¦å¹¶å†™å…¥åˆ°æ–‡ä»¶ä¸­
 		if(tem == 0)
 		{
 			fputc(tem + 48,save);
@@ -130,7 +130,7 @@ void InitHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[],int &n )
 			fputc(' ',save);
 		}
 		
-		tem = HT[i].rchild;							//½«i½áµãµÄrchild×ª»»³É×Ö·û²¢Ğ´Èëµ½ÎÄ¼şÖĞ
+		tem = HT[i].rchild;		//å°†iç»“ç‚¹çš„rchildè½¬æ¢æˆå­—ç¬¦å¹¶å†™å…¥åˆ°æ–‡ä»¶ä¸­
 		if(tem == 0)
 		{
 			fputc(tem + 48,save);
@@ -159,7 +159,7 @@ void InitHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[],int &n )
 	fclose(save);
 }
 /*
-	¸ù¾İ¹ş·òÂü±àÂë½«ÓÃ»§Ö¸¶¨µÄtxtÎÄ¼şÖĞµÄ×Ö·û±àÂë,²¢½«ËùµÃ±àÂë´æ´¢µ½ÓÃ»§Ö¸¶¨µÄtxtÎÄ¼ş
+	æ ¹æ®å“ˆå¤«æ›¼ç¼–ç å°†ç”¨æˆ·æŒ‡å®šçš„txtæ–‡ä»¶ä¸­çš„å­—ç¬¦ç¼–ç ,å¹¶å°†æ‰€å¾—ç¼–ç å­˜å‚¨åˆ°ç”¨æˆ·æŒ‡å®šçš„txtæ–‡ä»¶
 */
 void Encoding(HuffmanTree &HT, HuffmanCode &HC, char ch[])
 { 
@@ -167,14 +167,14 @@ void Encoding(HuffmanTree &HT, HuffmanCode &HC, char ch[])
 	char ToBeTran_Name[100],CodeFile_Name[100];
 	int i;
 	char c;
-	printf("ÇëÊäÈëËùÒª½øĞĞ±àÂëµÄÎÄ¼şµÄÎÄ¼şÃû:");
+	printf("è¯·è¾“å…¥æ‰€è¦è¿›è¡Œç¼–ç çš„æ–‡ä»¶çš„æ–‡ä»¶å:");
 	scanf("%s",ToBeTran_Name); 
 	if(( ToBeTran = fopen(ToBeTran_Name,"rb")) == NULL )
 	{ 
 		printf("Open file fail......\n");
 		exit(0);
 	}
-	printf("ÇëÊäÈë±àÂëºó±àÂë±íÊ¾µÄĞÅÏ¢Ëù´æ´¢µ½µÄÎÄ¼şµÄÎÄ¼şÃû:");
+	printf("è¯·è¾“å…¥ç¼–ç åç¼–ç è¡¨ç¤ºçš„ä¿¡æ¯æ‰€å­˜å‚¨åˆ°çš„æ–‡ä»¶çš„æ–‡ä»¶å:");
 	scanf("%s",CodeFile_Name);
 	if(( CodeFile = fopen(CodeFile_Name,"wb")) == NULL )
 	{
@@ -188,17 +188,17 @@ void Encoding(HuffmanTree &HT, HuffmanCode &HC, char ch[])
 			if(ch[i]==c)
 			{
 				fputs(HC[i],CodeFile);
-				printf("%c---%s\n",c,HC[i]);  //´òÓ¡cÏàÓ¦µÄ¹ş·òÂü±àÂë
+				printf("%c---%s\n",c,HC[i]);  //æ‰“å°cç›¸åº”çš„å“ˆå¤«æ›¼ç¼–ç 
 				break;
 			}
 	}
 	printf("\n");
-	printf("±àÂë³É¹¦!\n");
+	printf("ç¼–ç æˆåŠŸ!\n");
 	fclose(ToBeTran);
 	fclose(CodeFile);
 }
 /*
-	¶ÔÓÃ»§ÓÉ¹ş·òÂü±àÂëĞÅÏ¢±íÊ¾µÄµÄ±àÂëÎÄ¼ş½øĞĞÒëÂë£¬²¢´æÖÁµ½ÓÃ»§Ö¸¶¨µÄ.txtÎÄ¼şÖĞ
+	å¯¹ç”¨æˆ·ç”±å“ˆå¤«æ›¼ç¼–ç ä¿¡æ¯è¡¨ç¤ºçš„çš„ç¼–ç æ–‡ä»¶è¿›è¡Œè¯‘ç ï¼Œå¹¶å­˜è‡³åˆ°ç”¨æˆ·æŒ‡å®šçš„.txtæ–‡ä»¶ä¸­
 */
 void Decoding(HuffmanTree HT, char ch[] , int n)
 { 
@@ -207,14 +207,14 @@ void Decoding(HuffmanTree HT, char ch[] , int n)
 	char CodeFile_Name[100],TextFile_Name[100];
 	p = 2 * n - 1;
 	FILE *CodeFile,*TextFile;
-	printf("ÇëÊäÈëËùÒªÒëµÄÎÄ¼şÃû:");
+	printf("è¯·è¾“å…¥æ‰€è¦è¯‘çš„æ–‡ä»¶å:");
 	scanf("%s",CodeFile_Name);  
 	if(( CodeFile = fopen(CodeFile_Name,"rb")) == NULL )
 	{ 
 		printf("Open file fail......\n");
 		exit(0);
 	}
-	printf("ÇëÊäÈëÒëºóµÄ×Ö·û´æ´¢µ½µÄÎÄ¼şµÄÎÄ¼şÃû:");
+	printf("è¯·è¾“å…¥è¯‘åçš„å­—ç¬¦å­˜å‚¨åˆ°çš„æ–‡ä»¶çš„æ–‡ä»¶å:");
 	scanf("%s",TextFile_Name);  
 	if(( TextFile = fopen(TextFile_Name,"wb")) == NULL )
 	{
@@ -228,27 +228,27 @@ void Decoding(HuffmanTree HT, char ch[] , int n)
 		i++;
 		c = fgetc(CodeFile);
 	}
-	code[i] = '\0';  						//´ÓÎÄ¼ş¶ÁÈ¡×Ö·û£¬´æ´¢ÔÚcode[]Êı×éÖĞ
+	code[i] = '\0';  				//ä»æ–‡ä»¶è¯»å–å­—ç¬¦ï¼Œå­˜å‚¨åœ¨code[]æ•°ç»„ä¸­
 	i = 1;
-	while ( code[i] != '\0' && p != 0 )		//¶ÔÊı×écode[]ÖĞµÄ¹ş·òÂü±àÂë½øĞĞÒëÂë
+	while ( code[i] != '\0' && p != 0 )		//å¯¹æ•°ç»„code[]ä¸­çš„å“ˆå¤«æ›¼ç¼–ç è¿›è¡Œè¯‘ç 
 	{ 
 		if ( code[i] == '0' )
-			p=HT[p].lchild;  				//½øÈë×ó·ÖÖ§
+			p=HT[p].lchild;  		//è¿›å…¥å·¦åˆ†æ”¯
 		else
-			p = HT[p].rchild; 				//½øÈëÓÒ·ÖÖ§
-		if (!HT[p].lchild&& !HT[p].rchild)	//½øÈëÒ¶×Ó½áµã
+			p = HT[p].rchild; 		//è¿›å…¥å³åˆ†æ”¯
+		if (!HT[p].lchild&& !HT[p].rchild)	//è¿›å…¥å¶å­ç»“ç‚¹
 		{ 
 			fputc(ch[p], TextFile);  
 			printf("%c",ch[p]);    
-			p = 2 * n - 1;  				//ÖØĞÂ´ÓÊ÷¸ù³ö·¢½øĞĞÒëÂë
+			p = 2 * n - 1;  		//é‡æ–°ä»æ ‘æ ¹å‡ºå‘è¿›è¡Œè¯‘ç 
 		}
 		i++;
 	}
 	printf("\n");
-	printf("ÒëÂë³É¹¦!\n");
+	printf("è¯‘ç æˆåŠŸ!\n");
 }
 /*
-	´ÓÎÄ¼ş¶ÁÈ¡¹ş·òÂüÊ÷
+	ä»æ–‡ä»¶è¯»å–å“ˆå¤«æ›¼æ ‘
 */
 void ReadHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[], int &n)
 { 
@@ -260,22 +260,22 @@ void ReadHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[], int &n)
 		printf("Open file fail......\n");
 		exit(0);
 	}
-	fgets(c,10,htfTree); 								//»ñÈ¡¹ş·òÂüÊ÷Ò¶×Ó½áµã¸öÊıµÄ×Ö·û´®±íÊ¾ĞÎÊ½
+	fgets(c,10,htfTree); 					//è·å–å“ˆå¤«æ›¼æ ‘å¶å­ç»“ç‚¹ä¸ªæ•°çš„å­—ç¬¦ä¸²è¡¨ç¤ºå½¢å¼
 	i = 0;   
-	while( c[i] != '\n' )								//½«×Ö·û´®ĞÎÊ½×ª»»³ÉÕûÊıĞÎÊ½
+	while( c[i] != '\n' )					//å°†å­—ç¬¦ä¸²å½¢å¼è½¬æ¢æˆæ•´æ•°å½¢å¼
 		i++;
 	n = 0;
 	for( j = 0; j < i; j++ )  
-		n = 10 * n + c[j] - '0';						//Çó³öÒ¶×Ó½áµãÊın
+		n = 10 * n + c[j] - '0';			//æ±‚å‡ºå¶å­ç»“ç‚¹æ•°n
 	HC = (HuffmanCode)malloc((n + 1) * sizeof(char *)); 
 	HT = (HuffmanTree)malloc((2 * n) * sizeof(HTNode));  
 	i = 1;
 	while( i <= n )
 	{
-		ch[i] = fgetc(htfTree);  						//¶ÁÈ¡×Ö·û¼¯ÖĞµÄÒ»¸ö×Ö·û
-		HC[i] = (char *)malloc((10)*sizeof(char));		//ÉêÇëÓÃÓÚ´æ´¢¶ÁÈ¡µ½µÄ×Ö·û¼¯ÖĞµÄ×Ö·ûµÄ¹ş·òÂü±àÂëµÄ¿Õ¼ä
-		fgetc(htfTree); 								//½«¡®\t¡¯Êä³ö
-		ch1 = fgetc(htfTree);  							//¶ÁÈ¡¹ş·òÂü±àÂë£¬´æ´¢ÔÚÏàÓ¦µÄHC[i][]Êı×éÀï
+		ch[i] = fgetc(htfTree);  			//è¯»å–å­—ç¬¦é›†ä¸­çš„ä¸€ä¸ªå­—ç¬¦
+		HC[i] = (char *)malloc((10)*sizeof(char));	//ç”³è¯·ç”¨äºå­˜å‚¨è¯»å–åˆ°çš„å­—ç¬¦é›†ä¸­çš„å­—ç¬¦çš„å“ˆå¤«æ›¼ç¼–ç çš„ç©ºé—´
+		fgetc(htfTree); 				//å°†â€˜\tâ€™è¾“å‡º
+		ch1 = fgetc(htfTree);  				//è¯»å–å“ˆå¤«æ›¼ç¼–ç ï¼Œå­˜å‚¨åœ¨ç›¸åº”çš„HC[i][]æ•°ç»„é‡Œ
 		int j = 0;
 		while( ch1 != '\n' )
 		{
@@ -288,9 +288,9 @@ void ReadHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[], int &n)
 	}
 	ch[i] = '\0';
 	i = 0;
-	while( i < 2 * n - 1 )								//¶ÁÈ¡¹ş·òÂüÊ÷µÄ¸÷¸ö½áµãµÄparent,lchild,rchild.²¢¸³Öµµ½¹ş·òÂüÊ÷HTÖĞ
+	while( i < 2 * n - 1 )					//è¯»å–å“ˆå¤«æ›¼æ ‘çš„å„ä¸ªç»“ç‚¹çš„parent,lchild,rchild.å¹¶èµ‹å€¼åˆ°å“ˆå¤«æ›¼æ ‘HTä¸­
 	{  
-		ch1 = fgetc(htfTree); 							//¶ÁÈ¡parentµÄ×Ö·û´®ĞÎÊ½,´æ´¢ÔÚc[]ÖĞ£¬²¢½«Æä×ª»»³ÉÕûÊıĞÎÊ½£¬¸³¸øHT[i].parent
+		ch1 = fgetc(htfTree); 				//è¯»å–parentçš„å­—ç¬¦ä¸²å½¢å¼,å­˜å‚¨åœ¨c[]ä¸­ï¼Œå¹¶å°†å…¶è½¬æ¢æˆæ•´æ•°å½¢å¼ï¼Œèµ‹ç»™HT[i].parent
 		j = 0;
 		while( ch1 != ' ' )
 		{
@@ -301,7 +301,7 @@ void ReadHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[], int &n)
 		HT[i+1].parent = 0;
 		for(  t = 0; t < j; t++ )  
 			HT[i+1].parent = 10 * HT[i+1].parent + c[t] - '0';
-		ch1 = fgetc(htfTree); 							//¶ÁÈ¡lchildµÄ×Ö·û´®ĞÎÊ½£¬²¢½«Æä×ª»»³ÉÕûÊıĞÎÊ½£¬¸³¸øHT[i].lchild
+		ch1 = fgetc(htfTree); 				//è¯»å–lchildçš„å­—ç¬¦ä¸²å½¢å¼ï¼Œå¹¶å°†å…¶è½¬æ¢æˆæ•´æ•°å½¢å¼ï¼Œèµ‹ç»™HT[i].lchild
 		j = 0;
 		while( ch1 != ' ' )
 		{
@@ -312,7 +312,7 @@ void ReadHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[], int &n)
 		HT[i+1].lchild = 0;
 		for(  t = 0; t < j; t++ )  
 			HT[i+1].lchild = 10 * HT[i+1].lchild + c[t] - '0';
-		ch1 = fgetc(htfTree); 							//¶ÁÈ¡rchildµÄ×Ö·û´®ĞÎÊ½£¬²¢½«Æä×ª»»³ÉÕûÊıĞÎÊ½£¬¸³¸øHT[i].rchild
+		ch1 = fgetc(htfTree); 				//è¯»å–rchildçš„å­—ç¬¦ä¸²å½¢å¼ï¼Œå¹¶å°†å…¶è½¬æ¢æˆæ•´æ•°å½¢å¼ï¼Œèµ‹ç»™HT[i].rchild
 		j = 0;
 		while( ch1 != '\n' )
 		{
@@ -327,7 +327,7 @@ void ReadHuff_T( HuffmanTree &HT, HuffmanCode &HC, char ch[], int &n)
 	}
 }
 /*
-	´òÓ¡¸÷¸ö×Ö·ûºÍÏàÓ¦µÄ¹ş·òÂü±àÂë
+	æ‰“å°å„ä¸ªå­—ç¬¦å’Œç›¸åº”çš„å“ˆå¤«æ›¼ç¼–ç 
 */
 void Print_huffman(HuffmanTree &HT, HuffmanCode &HC, char ch[],int n)
 {
@@ -354,18 +354,18 @@ int main()
 	HuffmanTree HT;
 	HuffmanCode HC;
 	char ch[100];  
-	int n,Init_Mode = No;//Init_Mode = No ±íÊ¾ÄÚ´æÖĞÃ»ÓĞ¹ş·òÂüÊ÷µÄĞÅÏ¢
+	int n,Init_Mode = No;//Init_Mode = No è¡¨ç¤ºå†…å­˜ä¸­æ²¡æœ‰å“ˆå¤«æ›¼æ ‘çš„ä¿¡æ¯
 	int sel; 
 	do
 	{
-		printf("\n*************¹ş·òÂü±à/ÒëÂëÆ÷*************\n");
-		printf("*	1---³õÊ¼»¯			*\n");
-		printf("*	2---±àÂë			*\n");
-		printf("*	3---ÒëÂë			*\n");
-		printf("*	4---´òÓ¡			*\n");
-		printf("*	5---ÍË³ö			*\n");
+		printf("\n*************å“ˆå¤«æ›¼ç¼–/è¯‘ç å™¨*************\n");
+		printf("*	1---åˆå§‹åŒ–			*\n");
+		printf("*	2---ç¼–ç 			*\n");
+		printf("*	3---è¯‘ç 			*\n");
+		printf("*	4---æ‰“å°			*\n");
+		printf("*	5---é€€å‡º			*\n");
 		printf("*****************************************\n");
-		printf("ÇëÊäÈëÄúµÄÑ¡Ôñ(1-5):");
+		printf("è¯·è¾“å…¥æ‚¨çš„é€‰æ‹©(1-5):");
 		scanf("%d",&sel);   
 		switch(sel)
 		{
@@ -388,7 +388,7 @@ int main()
 				break;
 			case 4 :Print_huffman(HT,HC,ch,n);break;
 			case 5 :break;
-			default :printf("ÄúµÄÊäÈëÓĞ´í£¬ÇëÖØĞÂÑ¡Ôñ.\n");		
+			default :printf("æ‚¨çš„è¾“å…¥æœ‰é”™ï¼Œè¯·é‡æ–°é€‰æ‹©.\n");		
 		}	 
 	}while(sel!=5); 
 	return 0;
