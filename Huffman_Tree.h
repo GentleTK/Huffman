@@ -7,9 +7,9 @@ typedef struct
 {
 	unsigned int weight;
 	unsigned int parent,lchild,rchild;
-}HTNode, * HuffmanTree;  					//´æ´¢¹ş·òÂüÊ÷µÄ½áµãÀàĞÍ
+}HTNode, * HuffmanTree;  		//å­˜å‚¨å“ˆå¤«æ›¼æ ‘çš„ç»“ç‚¹ç±»å‹
 
-typedef char * * HuffmanCode;  				//ÓÃÓÚ´æ´¢×Ö·û¼¯ÖĞ¸÷¸ö×Ö·ûÏàÓ¦µÄ¹ş·òÂü±àÂë
+typedef char * * HuffmanCode;  		//ç”¨äºå­˜å‚¨å­—ç¬¦é›†ä¸­å„ä¸ªå­—ç¬¦ç›¸åº”çš„å“ˆå¤«æ›¼ç¼–ç 
 
 void strcpy(char *S1,char *S2)
 {  
@@ -22,21 +22,21 @@ void strcpy(char *S1,char *S2)
 	S1[i] = '\0';
 }
 /*
-	ÔÚHT[1]µ½HT[t-1]ÖĞÕÒ³öÈ¨Öµ×îĞ¡µÄÁ½¸öS1ºÍS2
+	åœ¨HT[1]åˆ°HT[t-1]ä¸­æ‰¾å‡ºæƒå€¼æœ€å°çš„ä¸¤ä¸ªS1å’ŒS2
 */
 void Select(HuffmanTree HT,int t,int &s1,int &s2)
 { 
 	int i = 1;
 	s1 = s2 = 0;
 	HT[0].weight = 65535;
-	while( i <= t )			//±éÀú²éÕÒÈ¨Öµ×îĞ¡µÄ½áµãS1
+	while( i <= t )			//éå†æŸ¥æ‰¾æƒå€¼æœ€å°çš„ç»“ç‚¹S1
 	{ 
 		if( HT[i].parent == 0 && HT[i].weight < HT[s1].weight )
 			s1 = i;
 		i++;
 	}
 	i = 1;
-	while( i <= t )			//±éÀú²éÕÒ³ıS1ÍâÈ¨Öµ×îĞ¡µÄ½áµãS2
+	while( i <= t )			//éå†æŸ¥æ‰¾é™¤S1å¤–æƒå€¼æœ€å°çš„ç»“ç‚¹S2
 	{ 
 		if( i != s1 && HT[i].parent == 0 && HT[i].weight < HT[s2].weight )
 			s2 = i;
@@ -44,7 +44,7 @@ void Select(HuffmanTree HT,int t,int &s1,int &s2)
 	}
 }
 /*
-	¸ù¾İ¸÷¸ö×Ö·ûµÄÈ¨Öµ¹¹Ôì¹ş·òÂüÊ÷HT£¬½«¶ÔÓ¦µÄ¹ş·òÂü±àÂë´æ´¢ÔÚHCÖĞ
+	æ ¹æ®å„ä¸ªå­—ç¬¦çš„æƒå€¼æ„é€ å“ˆå¤«æ›¼æ ‘HTï¼Œå°†å¯¹åº”çš„å“ˆå¤«æ›¼ç¼–ç å­˜å‚¨åœ¨HCä¸­
 */
 int HuffmanCoding( HuffmanTree &HT,HuffmanCode &HC,int *w,int n)
 { 
@@ -53,39 +53,39 @@ int HuffmanCoding( HuffmanTree &HT,HuffmanCode &HC,int *w,int n)
 	HTNode * p;
 	char *cd;
 	if( n <= 1 ) return 0;
-	m = 2 * n - 1;  												//¹ş·òÂüÊ÷µÄ×Ü½áµãÊ÷Îªm
-	HT = (HuffmanTree)malloc((m + 1) * sizeof(HTNode));				//ÉêÇë´æ´¢¹ş·òÂüÊ÷µÄ¿Õ¼ä
-	for(p = HT + 1, i = 1; i <= n; ++i, ++p, ++w)					//½«¸÷¸öÒ¶×Ó½áµãµÄweight¸³ÒÔÏàÓ¦µÄÈ¨Öµ£¬parent,lchild,rchild¾ù¸³Îª0
+	m = 2 * n - 1;  					//å“ˆå¤«æ›¼æ ‘çš„æ€»ç»“ç‚¹æ ‘ä¸ºm
+	HT = (HuffmanTree)malloc((m + 1) * sizeof(HTNode));	//ç”³è¯·å­˜å‚¨å“ˆå¤«æ›¼æ ‘çš„ç©ºé—´
+	for(p = HT + 1, i = 1; i <= n; ++i, ++p, ++w)		//å°†å„ä¸ªå¶å­ç»“ç‚¹çš„weightèµ‹ä»¥ç›¸åº”çš„æƒå€¼ï¼Œparent,lchild,rchildå‡èµ‹ä¸º0
 	{   
 		p->weight = *(w+1);
 		p->parent = p->lchild = p->rchild = 0; 
 	}
-	for( ; i <= m; ++i, ++p )										//½«¸÷¸ö·ÇÒ¶×Ó½áµãµÄweight,parent,lchild,rchild¾ù¸³Îª0
+	for( ; i <= m; ++i, ++p )				//å°†å„ä¸ªéå¶å­ç»“ç‚¹çš„weight,parent,lchild,rchildå‡èµ‹ä¸º0
 	{  
 		p->weight = p->parent = p->lchild = p->rchild = 0; 
 	}
-	for( i = n + 1; i <= m; ++i )									//¹¹Ôì¹ş·òÂüÊ÷£¬¸ø¸÷¸ö·ÇÒ¶×Ó½áµã¸³Öµ
+	for( i = n + 1; i <= m; ++i )				//æ„é€ å“ˆå¤«æ›¼æ ‘ï¼Œç»™å„ä¸ªéå¶å­ç»“ç‚¹èµ‹å€¼
 	{ 
 		Select(HT, i - 1, s1, s2);
 		HT[s1].parent = i; HT[s2].parent = i;
 		HT[i].lchild = s1; HT[i].rchild = s2;
 		HT[i].weight = HT[s1].weight + HT[s2].weight;
 	}
-	HC = (HuffmanCode)malloc((n + 1) * sizeof(char *));				//ÉêÇë¿Õ¼ä£¬ÓÃÓÚ´æ´¢Ö¸Ïò´æ´¢¸÷¸ö×Ö·ûÏàÓ¦¹ş·òÂü±àÂëµÄ×Ö·ûÊı×éµÄÖ¸Õë
-	cd = (char *)malloc(n * sizeof(char));   						//ÉêÇëÓÃÓÚÇó¹ş·òÂü±àÂë
-	cd[n - 1] = '\0';  												//±àÂë½áÊø·û
-	for( i = 1; i <= n; ++i)										//Öğ¸ö×Ö·ûÇó¹ş·òÂü±àÂë
+	HC = (HuffmanCode)malloc((n + 1) * sizeof(char *));	//ç”³è¯·ç©ºé—´ï¼Œç”¨äºå­˜å‚¨æŒ‡å‘å­˜å‚¨å„ä¸ªå­—ç¬¦ç›¸åº”å“ˆå¤«æ›¼ç¼–ç çš„å­—ç¬¦æ•°ç»„çš„æŒ‡é’ˆ
+	cd = (char *)malloc(n * sizeof(char));   		//ç”³è¯·ç”¨äºæ±‚å“ˆå¤«æ›¼ç¼–ç 
+	cd[n - 1] = '\0';  					//ç¼–ç ç»“æŸç¬¦
+	for( i = 1; i <= n; ++i)				//é€ä¸ªå­—ç¬¦æ±‚å“ˆå¤«æ›¼ç¼–ç 
 	{ 
-		start = n -1;   											//±àÂëÔÚÊı×écd[]ÖĞµÄ×îÇ°Î»ÖÃ
-		for(c = i,f = HT[i].parent; f != 0; c = f, f = HT[f].parent)//´ÓÒ¶×Óµ½¸ùÄæÏòÇó±àÂë
+		start = n -1;   				//ç¼–ç åœ¨æ•°ç»„cd[]ä¸­çš„æœ€å‰ä½ç½®
+		for(c = i,f = HT[i].parent; f != 0; c = f, f = HT[f].parent)	//ä»å¶å­åˆ°æ ¹é€†å‘æ±‚ç¼–ç 
 			if(HT[f].lchild == c)
 				cd[ --start ] = '0';
 			else
 				cd[ --start ] = '1';
-			HC[i] = (char *)malloc((n - start)*sizeof(char));		//ÎªµÚi¸ö×Ö·û±àÂë·ÖÅä¿Õ¼ä
-			strcpy(HC[i], &cd[start]);								//½«cd[]Êı×éµÄstartÎ»ÖÃµ½n-1Î»ÖÃ¸´ÖÆ¸øHC[i]
+			HC[i] = (char *)malloc((n - start)*sizeof(char));	//ä¸ºç¬¬iä¸ªå­—ç¬¦ç¼–ç åˆ†é…ç©ºé—´
+			strcpy(HC[i], &cd[start]);				//å°†cd[]æ•°ç»„çš„startä½ç½®åˆ°n-1ä½ç½®å¤åˆ¶ç»™HC[i]
 	}
-	free(cd); 														//ÊÍ·Å¿Õ¼ä
+	free(cd); 								//é‡Šæ”¾ç©ºé—´
 	return 1;
 }
 
